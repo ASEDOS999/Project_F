@@ -20,32 +20,35 @@ for x in range(im.size[1]):
 		if pix == sec_max_color: #what is more: letter or background?
 			im2.putpixel((y,x),0)
 
-print (im2.histogram())
-im2.save("copy.png")
-"""
+#im2.save("copy.png")
+
 #Letter's Border
 inletter = False
 foundletter=False
-start = 0
-end = 0
+start_x = 0
+start_y = 0
+end_x = 0
+end_y = 0
 
 letters = []
 
 for y in range(im2.size[0]): # slice across
 	for x in range(im2.size[1]): # slice down
 		pix = im2.getpixel((y,x))
-		if pix != 255:
+		if pix = 0:
 			inletter = True
 		if foundletter == False and inletter == True:
 			foundletter = True
-			start = y
+			start_y = y
+			start_x = x
 
 		if foundletter == True and inletter == False:
 			foundletter = False
-			end = y
-			letters.append((start,end))
+			end_y = y
+			end_x = x
+			letters.append((start_x, start_y, end_x, end_y))
 
 		inletter=False
 print (letters)
 
-"""
+
