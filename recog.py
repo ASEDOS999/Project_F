@@ -1,8 +1,9 @@
 import math
-import PIL #work with images
+import PIL
+import vector
 from PIL import Image
 
-im = Image.open("image2.png")
+im = Image.open("TEST/1.png")
 im = im.convert("P")
 mas = im.histogram()
 mas1 = im.histogram()
@@ -11,20 +12,48 @@ mas.reverse()
 first_max_color, sec_max_color = mas1.index(mas[0]), mas1.index(mas[1])
 
 #CREATING NEW IMAGE
+
 im2 = Image.new("P", im.size, 255)
 temp = {}
-for x in range(im.size[1]):
-	for y in range(im.size[0]):
-		pix = im.getpixel((y,x))
+for y in range(im.size[1]):
+	for x in range(im.size[0]):
+		pix = im.getpixel((x,y))
 		temp[pix] = pix
-		if pix == sec_max_color: #what is more: letter or background?
+		if pix != first_max_color: #what is more: letter or background?
 			im2.putpixel((y,x),0)
+#FILRATION
 
-#im2.save("copy.png")
+#STRING'S BORDER
+strings = []
+begin_string, end_string = 0, 0
 
-#Letter's Border
+#False = there aren't black pixels; True
+previous, str = False, False
+upd = 0
+
+for y in range(im2.size[1]):
+	previous = str
+	str = False
+	for x in range(im2.size[0]):
+		pix = im2.getpixel((x,y))
+		if pix == 0:
+			#In this pixel's string there are black pixels
+			str = True
+
+		if str = True:
+			if previous = False:
+				begin_string = y
+			break
+
+
+		if str = False and x == im2.size[0]:
+			#In this pixel's string there aren't black pixels
+			if previous = True:
+				end_string = y - 1
+				string.append((begin_string, end_string))
+#LETTER'S BORDER
 inletter = False
-foundletter=False
+foundletter = False
 start_x = 0
 start_y = 0
 end_x = 0
@@ -32,11 +61,12 @@ end_y = 0
 
 letters = []
 
-for y in range(im2.size[0]): # slice across
-	for x in range(im2.size[1]): # slice down
-		pix = im2.getpixel((y,x))
-		if pix = 0:
+for x in range(im2.size[0]):
+	for y in range(im2.size[1]):
+		pix = im2.getpixel((x,y))
+		if pix == 0:
 			inletter = True
+
 		if foundletter == False and inletter == True:
 			foundletter = True
 			start_y = y
@@ -51,4 +81,4 @@ for y in range(im2.size[0]): # slice across
 		inletter=False
 print (letters)
 
-
+#SIZE OF LABEL BETWEEN LETTERS AND BETWEEN WORDS
