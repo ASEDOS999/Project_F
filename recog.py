@@ -66,7 +66,6 @@ for y in range(im2.size[1]):
 			if previous == True:
 				end_string = y - 1
 				strings.append((begin_string, end_string))
-#print (len(strings), strings)
 #LETTER'S BORDER
 inletter = False
 foundletter = False
@@ -79,24 +78,23 @@ letters = []
 
 for string in strings:
 	start = string[0]
-	end = string[0]
+	end = string[1]
 	for x in range(im2.size[0]):
 		for y in range(start, end, 1):
 			pix = im2.getpixel((x,y))
 			if pix == 0:
 				inletter = True
 
-			if foundletter == False and inletter == True:
+		if foundletter == False and inletter == True:
 				foundletter = True
 				start_x = x
 
-			if foundletter == True and inletter == False:
-				foundletter = False
-				end_x = x
-				letters.append((start_x, end_x))
+		if foundletter == True and inletter == False:
+			foundletter = False
+			end_x = x
+			letters.append((start_x, end_x))
 
-			inletter=False
-print (letters)
+		inletter=False
 
 #SIZE OF LABEL BETWEEN LETTERS AND BETWEEN WORDS
 
