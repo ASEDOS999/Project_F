@@ -22,7 +22,6 @@ for y in range(im.size[1]):
 		if pix != first_max_color: #what is more: letter or background?
 			im2.putpixel((x,y),0)
 
-im2 = Image.new("P", im.size, 255)
 
 #FILRATION
 for x in range(im.size[0]):
@@ -32,16 +31,14 @@ for x in range(im.size[0]):
 			count = 0
 			for i_x in range(-3, 3, 1):
 				for i_y in range(-3, 3, 1):
-					x_p = min(im.size[0], max(0, x + i_x))
-					y_p = min(im.size[1], max(0, y + i_y))
+					x_p = min(im2.size[0], max(0, x + i_x))
+					y_p = min(im2.size[1], max(0, y + i_y))
 					if im2.getpixel((x_p, y_p)) == 0:
 						count += 1;
 			if count < 2:
 				im2.putpixel((x, y), 255)
-			else:
-				im2.putpixel((x, y), 0)
 
-
+im2.save("copy.png")
 #STRING'S BORDER
 strings = []
 begin_string, end_string = 0, 0
@@ -55,21 +52,21 @@ for y in range(im2.size[1]):
 	str = False
 	for x in range(im2.size[0]):
 		pix = im2.getpixel((x,y))
-		if pix == 0:
+		if pix != 255:
 			#In this pixel's string there are black pixels
 			str = True
 
-		if str == True:
-			if previous == False:
-				begin_string = y
+		if str == True and previous == False:
+			begin_string = y
 			break
 
 
-		if str == False and x == im2.size[0]:
+		if str == False and x == im2.size[0] - 1:
 			#In this pixel's string there aren't black pixels
 			if previous == True:
 				end_string = y - 1
 				strings.append((begin_string, end_string))
+#print (len(strings), strings)
 #LETTER'S BORDER
 inletter = False
 foundletter = False
