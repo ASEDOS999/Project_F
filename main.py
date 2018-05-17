@@ -2,6 +2,7 @@ import math
 import PIL
 import vector
 import recog
+import os
 from PIL import Image
 
 new_elems = [] #set for new recognazable image
@@ -115,15 +116,26 @@ label = 3 * min #Let's think that labels are more than three times that spacing 
 #CREATE VECTOR'S SET
 
 set = ['0','1','2','3','4','5','6','7','8','9','0','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
-set.extend('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z')
-set.extend('?', '.', ',', ':', ';')
-set.extend('+', '-', '=', '<', '>')
+set.extend(('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'))
+set.extend(('?', ',', ':', ';')) #There isn't symbol of point
+set.extend(('+', '-', '=', '<', '>'))
 set.extend(new_elems) #if user decided to add new elems
 
 imageset = []
 for letter in set:
-	for img in os.listdir('set/%s'%(letter)):
+	for img in os.listdir('SET/%s'%(letter)):
 		temp = []
 		temp.append(vector.buildvector(Image.open('set/%s/%s'%(letter, img))))
 		imageset.append((letter, temp))
 
+#SIMPLE RECOGNITION OF SYMBOLS
+
+v = vector.VectorCompare()
+text_letter = []
+
+for letter in letters:
+	guess = []
+	cutlet = im2.crop(letter)
+	guess = recog.symb_recog(v, cutlet, imageset)
+	guess.sort()
+	text_letter.append(guess[0][1])
