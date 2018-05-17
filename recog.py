@@ -20,8 +20,27 @@ for y in range(im.size[1]):
 		pix = im.getpixel((x,y))
 		temp[pix] = pix
 		if pix != first_max_color: #what is more: letter or background?
-			im2.putpixel((y,x),0)
+			im2.putpixel((x,y),0)
+
+im2 = Image.new("P", im.size, 255)
+
 #FILRATION
+for x in range(im.size[0]):
+	for y in range(im.size[1]):
+		pix = im2.getpixel((x, y))
+		if pix == 0:
+			count = 0
+			for i_x in range(-3, 3, 1):
+				for i_y in range(-3, 3, 1):
+					x_p = min(im.size[0], max(0, x + i_x))
+					y_p = min(im.size[1], max(0, y + i_y))
+					if im2.getpixel((x_p, y_p)) == 0:
+						count += 1;
+			if count < 2:
+				im2.putpixel((x, y), 255)
+			else:
+				im2.putpixel((x, y), 0)
+
 
 #STRING'S BORDER
 strings = []
@@ -40,17 +59,17 @@ for y in range(im2.size[1]):
 			#In this pixel's string there are black pixels
 			str = True
 
-		if str = True:
-			if previous = False:
+		if str == True:
+			if previous == False:
 				begin_string = y
 			break
 
 
-		if str = False and x == im2.size[0]:
+		if str == False and x == im2.size[0]:
 			#In this pixel's string there aren't black pixels
-			if previous = True:
+			if previous == True:
 				end_string = y - 1
-				string.append((begin_string, end_string))
+				strings.append((begin_string, end_string))
 #LETTER'S BORDER
 inletter = False
 foundletter = False
@@ -61,24 +80,26 @@ end_y = 0
 
 letters = []
 
-for x in range(im2.size[0]):
-	for y in range(im2.size[1]):
-		pix = im2.getpixel((x,y))
-		if pix == 0:
-			inletter = True
+for string in strings:
+	start = string[0]
+	end = string[0]
+	for x in range(im2.size[0]):
+		for y in range(start, end, 1):
+			pix = im2.getpixel((x,y))
+			if pix == 0:
+				inletter = True
 
-		if foundletter == False and inletter == True:
-			foundletter = True
-			start_y = y
-			start_x = x
+			if foundletter == False and inletter == True:
+				foundletter = True
+				start_x = x
 
-		if foundletter == True and inletter == False:
-			foundletter = False
-			end_y = y
-			end_x = x
-			letters.append((start_x, start_y, end_x, end_y))
+			if foundletter == True and inletter == False:
+				foundletter = False
+				end_x = x
+				letters.append((start_x, end_x))
 
-		inletter=False
+			inletter=False
 print (letters)
 
 #SIZE OF LABEL BETWEEN LETTERS AND BETWEEN WORDS
+
