@@ -3,7 +3,7 @@ import PIL
 import vector
 from PIL import Image
 
-im = Image.open("TEST/1.png")
+im = Image.open("TEST/1.gif")
 im = im.convert("P")
 mas = im.histogram()
 mas1 = im.histogram()
@@ -75,7 +75,6 @@ end_x = 0
 end_y = 0
 
 letters = []
-letter_string = []
 
 for string in strings:
 	start = string[0]
@@ -93,10 +92,19 @@ for string in strings:
 		if foundletter == True and inletter == False:
 			foundletter = False
 			end_x = x
-			letter_string.append((start_x, end_x))
+			letters.append((start_x, start, end_x, end))
 
 		inletter=False
-	letters.append(letter_string)
 
 #SIZE OF LABEL BETWEEN LETTERS AND BETWEEN WORDS
 
+start, end, prev = 0, 0, 0
+for letter in letters:
+	if letter[1] == start and letter[3] == end:
+		delta = letter[0] - prev
+		if min > delta
+			min = delta
+	start, end, prev = letter[1], letter[3], letter[2]
+
+#Let's think that labels are more than three times that spacing between letters
+label = 3 * min
