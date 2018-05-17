@@ -75,6 +75,7 @@ end_x = 0
 end_y = 0
 
 letters = []
+letter_string = []
 
 for string in strings:
 	start = string[0]
@@ -92,9 +93,10 @@ for string in strings:
 		if foundletter == True and inletter == False:
 			foundletter = False
 			end_x = x
-			letters.append((start_x, end_x))
+			letter_string.append((start_x, end_x))
 
 		inletter=False
+	letters.append(letter_string)
 
 #SIZE OF LABEL BETWEEN LETTERS AND BETWEEN WORDS
 
