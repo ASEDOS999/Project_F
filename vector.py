@@ -1,5 +1,14 @@
 import math
 
+def buildvector(im):
+	d1 = {}
+	count = 0
+	for i in im.getdata():
+		d1[count] = i
+		count += 1
+	return d1
+
+#It is vector compare: his module and Hamming's distance between two vector-images
 class VectorCompare:
 	def magnitude(self,concordance):
 		total = 0
