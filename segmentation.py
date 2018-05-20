@@ -37,7 +37,7 @@ class segmentation():
 		end_x = 0
 		end_y = 0
 
-		for string in strings:
+		for string in self.strings:
 			start = string[0]
 			end = string[1]
 			for x in range(im2.size[0]):
@@ -53,7 +53,7 @@ class segmentation():
 				if foundletter == True and inletter == False:
 					foundletter = False
 					end_x = x
-					letters.append((start_x, start, end_x, end))
+					self.letters.append((start_x, start, end_x, end))
 
 				inletter=False
 		return 0
