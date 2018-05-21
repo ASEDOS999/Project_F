@@ -50,18 +50,6 @@ border = segmentation()
 border.string_border(im2)
 border.letter_border(im2)
 
-for string in border.strings:
-	for x in range(im2.size[0]):
-		im2.putpixel((x, string[0]), 0)
-		im2.putpixel((x, string[1]), 0)
-
-for letter in border.letters:
-	for y in range(letter[1], letter[3], 1):
-		im2.putpixel((letter[0], y), 0)
-		im2.putpixel((letter[2], y), 0)
-
-im2.save("border.png")
-"""
 #SIZE OF LABEL BETWEEN LETTERS AND BETWEEN WORDS
 
 start, end, prev = 0, 0, 0
@@ -100,4 +88,3 @@ for letter in letters:
 	guess = recog.symb_recog(v, cutlet, imageset)
 	guess.sort()
 	text_letter.append(guess[0][1])
-"""
