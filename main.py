@@ -50,6 +50,7 @@ border = segmentation()
 border.string_border(im2)
 border.letter_border(im2)
 
+strings, letters = border.strings, border.letters
 #SIZE OF LABEL BETWEEN LETTERS AND BETWEEN WORDS
 
 start, end, prev = 0, 0, 0

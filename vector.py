@@ -26,11 +26,11 @@ class Vector_Compare:
 				topvalue += count * concordance2[word]
 		return topvalue / (self.magnitude(concordance1) * self.magnitude(concordance2))
 
-class Common_Vector_Compare(VectorCompare):
+class Common_Vector_Compare(Vector_Compare):
 	def compression(im, x, y):
 		delta_x = im.size[0]//(x-1)
 		delta_y = im.size[1]//(y-1)
-		if delta_x == 1 && delta_y == 1:
+		if delta_x == 1 and delta_y == 1:
 			#The image does not need a compression
 			return im
 		im_new = Image.new("P", (x, y), 255)
