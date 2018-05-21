@@ -3,6 +3,7 @@ import PIL
 import vector
 import recog
 import os
+from segmentation import segmentation
 from PIL import Image
 
 new_elems = [] #set for new recognazable image
@@ -44,63 +45,23 @@ for x in range(im.size[0]):
 				im2.putpixel((x, y), 255)
 
 im2.save("copy.png")
-#STRING'S BORDER
-strings = []
-begin_string, end_string = 0, 0
 
-#False = there aren't black pixels; True
-previous, str = False, False
-upd = 0
+border = segmentation()
+border.string_border(im2)
+border.letter_border(im2)
 
-for y in range(im2.size[1]):
-	previous = str
-	str = False
+for string in border.strings:
 	for x in range(im2.size[0]):
-		pix = im2.getpixel((x,y))
-		if pix != 255:
-			#In this pixel's string there are black pixels
-			str = True
+		im2.putpixel((x, string[0]), 0)
+		im2.putpixel((x, string[1]), 0)
 
-		if str == True and previous == False:
-			begin_string = y
-			break
+for letter in border.letters:
+	for y in range(letter[1], letter[3], 1):
+		im2.putpixel((letter[0], y), 0)
+		im2.putpixel((letter[2], y), 0)
 
-
-		if str == False and x == im2.size[0] - 1:
-			#In this pixel's string there aren't black pixels
-			if previous == True:
-				end_string = y - 1
-				strings.append((begin_string, end_string))
-#LETTER'S BORDER
-inletter = False
-foundletter = False
-start_x = 0
-start_y = 0
-end_x = 0
-end_y = 0
-
-letters = []
-
-for string in strings:
-	start = string[0]
-	end = string[1]
-	for x in range(im2.size[0]):
-		for y in range(start, end, 1):
-			pix = im2.getpixel((x,y))
-			if pix == 0:
-				inletter = True
-
-		if foundletter == False and inletter == True:
-				foundletter = True
-				start_x = x
-
-		if foundletter == True and inletter == False:
-			foundletter = False
-			end_x = x
-			letters.append((start_x, start, end_x, end))
-
-		inletter=False
-
+im2.save("border.png")
+"""
 #SIZE OF LABEL BETWEEN LETTERS AND BETWEEN WORDS
 
 start, end, prev = 0, 0, 0
@@ -139,3 +100,4 @@ for letter in letters:
 	guess = recog.symb_recog(v, cutlet, imageset)
 	guess.sort()
 	text_letter.append(guess[0][1])
+"""

@@ -8,11 +8,11 @@ class segmentation():
 		previous, str = False, False
 		upd = 0
 
-		for y in range(im2.size[1]):
+		for y in range(im.size[1]):
 			previous = str
 			str = False
-			for x in range(im2.size[0]):
-				pix = im2.getpixel((x,y))
+			for x in range(im.size[0]):
+				pix = im.getpixel((x,y))
 				if pix != 255:
 					#In this pixel's string there are black pixels
 					str = True
@@ -22,7 +22,7 @@ class segmentation():
 					break
 
 
-				if str == False and x == im2.size[0] - 1:
+				if str == False and x == im.size[0] - 1:
 					#In this pixel's string there aren't black pixels
 					if previous == True:
 						end_string = y - 1
@@ -40,9 +40,9 @@ class segmentation():
 		for string in self.strings:
 			start = string[0]
 			end = string[1]
-			for x in range(im2.size[0]):
+			for x in range(im.size[0]):
 				for y in range(start, end, 1):
-					pix = im2.getpixel((x,y))
+					pix = im.getpixel((x,y))
 					if pix == 0:
 						inletter = True
 
