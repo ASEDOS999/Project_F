@@ -46,24 +46,28 @@ class segmentation():
 				last_column = current_column
 				current_column = []
 				sum = 0
-				k = 1
+				k = 0
 
 				for y in range(start, end, 1):
 					pix = im.getpixel((x,y))
 					current_column.append(pix)
 					if pix == 0:
 						inletter = True
-				"""
+
 				#Connectivity_check
 				if x == 0:
 					k = 1
 				else:
 					for i in range(len(current_column)):
-						if last_column[i] != 255 and current_column[i] != 255:
-							sum += 1
-					if sum > 0:
+						for plus_i in range(-3, 3, 1):
+							for plus_j in range(-3, 3, 1):
+								last_index = min(len(last_column) - 1, max(0, i + plus_i))
+								cur_index = min(len(current_column) - 1, max(0, i + plus_j))
+								if last_column[last_index] != 255 and current_column[cur_index] != 255:
+									sum += 1
+					if sum >= 0:
 						k = 1
-				"""
+
 				if foundletter == False and inletter == True:
 					foundletter = True
 					start_x = x
