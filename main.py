@@ -86,7 +86,7 @@ for letter in letters:
 	cutlet = im2.crop(letter)
 	guess = recog.symb_recog(v, cutlet, imageset)
 	guess.sort()
-	text_letter.append(guess[0][1])
+	text_letter.append(guess[len(guess) - 1][1])
 
 output = open('out.txt', 'w')
 
