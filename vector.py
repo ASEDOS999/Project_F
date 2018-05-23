@@ -1,9 +1,10 @@
 import math
 import PIL
+from PIL import Image
 
 #It is vector compare: vector module and Hamming's distance between two vector-images
 class Vector_Compare:
-	def buildvector(im):
+	def buildvector(self, im):
 		d1 = {}
 		count = 0
 		for i in im.getdata():
@@ -24,12 +25,13 @@ class Vector_Compare:
 		for word, count in concordance1.iteritems():
 			if concordance2.has_key(word):
 				topvalue += count * concordance2[word]
-		return topvalue / (self.magnitude(concordance1) * self.magnitude(concordance2))
+		return topvalue / max(1, (self.magnitude(concordance1) * self.magnitude(concordance2)))
 
 class Common_Vector_Compare(Vector_Compare):
-	def compression(im, x, y):
-		delta_x = im.size[0]//(x-1)
-		delta_y = im.size[1]//(y-1)
+	def compression(self, im, x, y):
+		pix = 0
+		delta_x = max(im.size[0]//(x-1), 0)
+		delta_y = max(im.size[1]//(y-1), 0)
 		if delta_x == 1 and delta_y == 1:
 			#The image does not need a compression
 			return im
@@ -38,8 +40,8 @@ class Common_Vector_Compare(Vector_Compare):
 			for j in range(y):
 				#Deviding into squares
 				black, white = 0, 0
-				for x_i in (i * delta_x, min((i + 1) * delta_x, size[0]), 1):
-					for y_j in (i * delta_y, min((i + 1) * delta_y, size[1]), 1):
+				for x_i in (min(i * delta_x, im.size[0] - 1), min((i + 1) * delta_x, im.size[0] - 1), 1):
+					for y_j in (min(j * delta_y, im.size[1] - 1), min((j + 1) * delta_y, im.size[1] - 1), 1):
 						pix = im.getpixel((x_i, y_j))
 						if pix == 0:
 							black = black + 1
@@ -56,4 +58,4 @@ class Common_Vector_Compare(Vector_Compare):
 		im2_new = Image.new("P", (min_x, min_y), 255)
 		im1_new = self.compression(im1, min_x, min_y)
 		im2_new = self.compression(im2, min_x, min_y)
-		return (buildvector(im1), buildvector(im2))
+		return (self.buildvector(im1_new), self.buildvector(im2_new))

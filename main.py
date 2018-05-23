@@ -8,7 +8,7 @@ from PIL import Image
 
 new_elems = [] #set for new recognazable image
 
-im = Image.open("TEST/1.gif")
+im = Image.open("TEST/new_letter.gif")
 #im = im.convert("P")
 mas = im.histogram()
 mas1 = im.histogram()
@@ -44,7 +44,6 @@ for x in range(im.size[0]):
 			if count < 2:
 				im2.putpixel((x, y), 255)
 
-im2.save("copy.png")
 
 border = segmentation()
 border.string_border(im2)
@@ -74,13 +73,12 @@ set.extend(new_elems) #if user decided to add new elems
 imageset = []
 for letter in set:
 	for img in os.listdir('SET/%s'%(letter)):
-		temp = []
-		temp.append(vector.buildvector(Image.open('set/%s/%s'%(letter, img))))
+		temp = Image.open('SET/%s/%s'%(letter, img))
 		imageset.append((letter, temp))
 
 #SIMPLE RECOGNITION OF SYMBOLS
 
-v = vector.VectorCompare()
+v = vector.Common_Vector_Compare()
 text_letter = []
 
 for letter in letters:
@@ -89,3 +87,10 @@ for letter in letters:
 	guess = recog.symb_recog(v, cutlet, imageset)
 	guess.sort()
 	text_letter.append(guess[0][1])
+
+output = open('out.txt', 'w')
+
+for i in text_letter:
+	output.write(i)
+
+output.close()
