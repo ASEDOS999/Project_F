@@ -52,16 +52,24 @@ border.letter_border(im2)
 strings, letters = border.strings, border.letters
 #SIZE OF LABEL BETWEEN LETTERS AND BETWEEN WORDS
 
+delta = 0
+for letter in letters:
+	delta = letter[2] - letter[0]
+delta = delta / len(letters)
+
+
+label = 0.5 * delta #Let's think that label has size that is close to letter's size
+
+set_label = []
+place_label = 0
 start, end, prev = 0, 0, 0
 for letter in letters:
 	if letter[1] == start and letter[3] == end:
 		delta = letter[0] - prev
-		if min > delta:
-			min = delta
+		if delta >= label:
+			set_label.append(place_label)
+	place_label += 1
 	start, end, prev = letter[1], letter[3], letter[2]
-
-label = 3 * min #Let's think that labels are more than three times that spacing between letters
-
 #CREATE VECTOR'S SET
 
 set = ['0','1','2','3','4','5','6','7','8','9','0','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
@@ -90,7 +98,14 @@ for letter in letters:
 
 output = open('out.txt', 'w')
 
+number_letter = 0
+k = set_label.pop(0)
 for i in text_letter:
 	output.write(i)
+	number_letter += 1
+	if number_letter == k:
+		output.write(' ')
+		if len(set_label) > 0:
+			k = set_label.pop(0)
 
 output.close()
