@@ -3,10 +3,9 @@ from PIL import Image
 import os
 from segmentation import segmentation
 
-path = "./TEST/letter.gif"
+path = "./TEST/new_letter.gif"
 
 im = Image.open(path)
-#im = im.convert("P")
 mas = im.histogram()
 mas1 = im.histogram()
 mas.sort()
@@ -25,7 +24,6 @@ for y in range(im.size[1]):
 		if pix != first_max_color: #what is more: letter or background?
 			im2.putpixel((x,y),0)
 
-im2.save("copy1.png")
 
 #FILRATION
 for x in range(im.size[0]):
@@ -46,13 +44,11 @@ for x in range(im.size[0]):
 border = segmentation()
 border.string_border(im2)
 border.letter_border(im2)
-im2.save("set.png")
 
 count = 0
 for letter in border.letters:
 	if letter[0] - letter[2] < 0:
 		im3 = im2.crop(letter)
-		print (letter)
-		im3.save("./SET/%s.gif"%(count))
+		im3.save("./SET_DEBUG/%s.gif"%(count))
 	count = count + 1
 
