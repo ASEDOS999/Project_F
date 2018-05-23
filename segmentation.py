@@ -45,8 +45,6 @@ class segmentation():
 			for x in range(im.size[0]):
 				last_column = current_column
 				current_column = []
-				sum = 0
-				k = 0
 
 				for y in range(start, end, 1):
 					pix = im.getpixel((x,y))
@@ -54,26 +52,36 @@ class segmentation():
 					if pix == 0:
 						inletter = True
 
+				"""
+				#if letter ended then you must clear vector of pixel
+				k = 0	#for connectivity test there must be k = 1
 				#Connectivity_check
+				epsilon = 2 #parameter of compression
 				if x == 0:
 					k = 1
 				else:
+					sum, cur, last = 0, 0, 0
+
 					for i in range(len(current_column)):
-						for plus_i in range(-3, 3, 1):
-							for plus_j in range(-3, 3, 1):
-								last_index = min(len(last_column) - 1, max(0, i + plus_i))
-								cur_index = min(len(current_column) - 1, max(0, i + plus_j))
-								if last_column[last_index] != 255 and current_column[cur_index] != 255:
-									sum += 1
-					if sum >= 0:
-						k = 1
+						for plus in range(-epsilon, epsilon, 1):
+							last_index = min(len(last_column) - 1, max(0, i + plus)
+							cur_index = min(len(current_column) - 1, max(0, i + plus))
+							if last_column[last_index] != 255:
+								last +=1
+							if  current_column[cur_index] != 255:
+								cur +=1
+						if cur > 0 and last > 0:
+							sum += 1
+				if sum > 0:
+					k = 1
+				"""
 
 				if foundletter == False and inletter == True:
 					foundletter = True
 					start_x = x
 
 				#Finded letter has not more pixel in this column or this letter is not connected with current pixel
-				if foundletter == True and (inletter == False or k == 0):
+				if foundletter == True and (inletter == False):
 					foundletter = False
 					end_x = x
 					self.letters.append((start_x, start, end_x, end))
