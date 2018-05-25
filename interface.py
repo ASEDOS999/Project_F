@@ -1,4 +1,5 @@
 from Tkinter import *
+import main
 
 def end():
         sys.exit()
@@ -11,12 +12,12 @@ class window():
 
 	root=Tk()
 	set_of_set = []
+	work_set = []
 	color_bg, color_text, style_text = "white", "black", "arial 14"
 
 	def start(self):
 		clear(self.root)
 		self.root.title("TextRecognition")
-#		self.root.geometry("300x250")
 
 		rec = Button(self.root,text='Recognize',width=20,height=1,bg = self.color_bg,fg = self.color_text,font = self.style_text, command = self.choose_recog)
 		rec.pack()
@@ -24,7 +25,7 @@ class window():
 		set = Button(self.root,text='Sets of letters',width=20,height=1,bg = self.color_bg,fg = self.color_text,font = self.style_text, command = self.show_set)
 		set.pack()
 
-		help = Button(self.root,text='Help',width=20,height=1,bg = self.color_bg,fg = self.color_text,font = self.style_text)
+		help = Button(self.root,text='Help',width=20,height=1,bg = self.color_bg,fg = self.color_text,font = self.style_text, command = self.help)
 		help.pack()
 
 		exit = Button(self.root,text='Exit',width=20,height=1,bg = self.color_bg,fg = self.color_text,font = self.style_text, command = end)
@@ -42,12 +43,43 @@ class window():
 			list_of_choose.insert(END, i[0])
 		list_of_choose.pack()
 
+		next = Button(self.root, text = "Next", bg = self.color_bg, fg = self.color_text, font = self.style_text,
+		command = lambda: self.recog_start(list_of_choose))
+		next.pack()
 
 		cancel = Button(self.root, text = "Cancel", bg = self.color_bg, fg = self.color_text, font = self.style_text,
 		command = self.start)
 		cancel.pack()
 
 		self.root.mainloop()
+
+	def recog_start(self, lbox):
+		select = list(lbox.curselection())
+		clear(self.root)
+		for i in select:
+			self.work_set.extend(self.set_of_set[i][1])
+
+		label = Label(text = "Enter path")
+		label.pack()
+
+		#input file
+
+		start = Button(self.root, text = "Start", bg = self.color_bg, fg = self.color_text, font = self.style_text, 
+		command = self.do_recog) 		#start recognition
+
+		start.pack()
+		cancel = Button(self.root, text = "Cancel", bg = self.color_bg, fg = self.color_text, font = self.style_text,
+		command = self.choose_recog)
+		cancel.pack()
+	def do_recog(self):
+		clear(self.root)
+
+		label = Label(text = "Wait, please")
+		label.pack()
+
+		main.text(self.work_set)
+		self.work_set = []
+		self.start()
 
 	def show_set(self):
 		clear(self.root)
@@ -71,9 +103,14 @@ class window():
 		cancel.pack()
 
 	def show_it(self, lbox):
+		show = []
 		select = list(lbox.curselection())
+		for i in select:
+			for j in self.set_of_set[i][1]:
+				show.append(j[0])
 
-
+		for i in show:
+			print(i) #Change it: it must to be in window
 	def add_set(self):
 		clear(self.root)
 		label1 = Label(text = "Input directory with new set")
@@ -87,3 +124,14 @@ class window():
 		command = self.show_set)
 		cancel.pack()
 
+	def help(self):
+		clear(self.root)
+		label1 = Label(text = "There must be help for users. But there is not it:)")
+		label1.pack()
+
+		label2 = Label(text = "Please pick \"Cancel\" and don't worry")
+		label2.pack()
+
+		cancel = Button(self.root, text = "Cancel", bg = self.color_bg, fg = self.color_text, font = self.style_text,
+		command = self.start)
+		cancel.pack()
