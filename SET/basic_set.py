@@ -24,6 +24,7 @@ set = ['?', ',', ':', ';', '!']
 out.write('Punctuation\n{\n')
 for i in set:
 	out.write('%s:SET/%s\n'%(i, i))
+out.write('.:SET/point\n')
 out.write('}')
 out.write('\n')
 
