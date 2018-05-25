@@ -1,5 +1,6 @@
 from Tkinter import *
 import tkMessageBox as mBox
+import make_set
 import main
 
 def end():
@@ -25,6 +26,10 @@ class window():
 
 		set = Button(self.root,text='Sets of letters',width=20,height=1,bg = self.color_bg,fg = self.color_text,font = self.style_text, command = self.show_set)
 		set.pack()
+
+		cut = Button(self.root,text='Cut letters from image',width=20,height=1,bg = self.color_bg,fg = self.color_text,font = self.style_text, 
+		command = self.do_cut)
+		cut.pack()
 
 		help = Button(self.root,text='Help',width=20,height=1,bg = self.color_bg,fg = self.color_text,font = self.style_text, command = self.help)
 		help.pack()
@@ -124,6 +129,22 @@ class window():
 		command = self.show_set)
 		cancel.pack()
 
+	def do_cut(self):
+		clear(self.root)
+		label = Label(text = "Enter path of file")
+		label.pack()
+
+		path = StringVar()
+		entry = Entry(textvariable = path)
+		entry.pack()
+
+		start = Button(self.root, text = "Start", bg = self.color_bg, fg = self.color_text, font = self.style_text, 
+		command = lambda: make_set.cut(path.get()))
+		start.pack()
+
+		cancel = Button(self.root, text = "Cancel", bg = self.color_bg, fg = self.color_text, font = self.style_text,
+		command = self.start)
+		cancel.pack()
 	def help(self):
 		clear(self.root)
 		label1 = Label(text = "There must be help for users. But there is not it:)")
