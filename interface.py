@@ -1,4 +1,5 @@
 from Tkinter import *
+import tkMessageBox as mBox
 import main
 
 def end():
@@ -59,25 +60,27 @@ class window():
 		for i in select:
 			self.work_set.extend(self.set_of_set[i][1])
 
-		label = Label(text = "Enter path")
+		label = Label(text = "Enter path of recognized file from Home")
 		label.pack()
 
-		#input file
+		path = StringVar()
+		entry = Entry(textvariable = path)
+		entry.pack()
 
 		start = Button(self.root, text = "Start", bg = self.color_bg, fg = self.color_text, font = self.style_text, 
-		command = self.do_recog) 		#start recognition
+		command = lambda: self.do_recog(path)) 		#start recognition
 
 		start.pack()
 		cancel = Button(self.root, text = "Cancel", bg = self.color_bg, fg = self.color_text, font = self.style_text,
 		command = self.choose_recog)
 		cancel.pack()
-	def do_recog(self):
+	def do_recog(self, path):
 		clear(self.root)
 
 		label = Label(text = "Wait, please")
 		label.pack()
 
-		main.text(self.work_set)
+		main.text(self.work_set, path.get())
 		self.work_set = []
 		self.start()
 
@@ -109,8 +112,8 @@ class window():
 			for j in self.set_of_set[i][1]:
 				show.append(j[0])
 
-		for i in show:
-			print(i) #Change it: it must to be in window
+		mBox.showinfo("Choosed Sets", show)
+
 	def add_set(self):
 		clear(self.root)
 		label1 = Label(text = "Input directory with new set")

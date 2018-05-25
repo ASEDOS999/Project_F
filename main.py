@@ -6,8 +6,8 @@ import os
 from segmentation import segmentation
 from PIL import Image
 
-def text(set):
-	im = Image.open("TEST/new_letter.gif")
+def text(set, path):
+	im = Image.open("../../../%s"%(path))
 	mas = im.histogram()
 	mas1 = im.histogram()
 	mas.sort()
