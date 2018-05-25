@@ -75,10 +75,7 @@ class window():
 		command = self.choose_recog)
 		cancel.pack()
 	def do_recog(self, path):
-		clear(self.root)
-
-		label = Label(text = "Wait, please")
-		label.pack()
+		mBox.showinfo("Do recognition", "Wait, please")
 
 		main.text(self.work_set, path.get())
 		self.work_set = []
