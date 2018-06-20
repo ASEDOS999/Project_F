@@ -1,4 +1,9 @@
 import main
+import sys
+
+sys.path.append("./Segmentation")
+sys.path.append("./Recognition")
+sys.path.append("./Interface")
 
 set = []
 set.append(('A', './SET/A'))

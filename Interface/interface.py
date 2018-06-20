@@ -1,3 +1,6 @@
+import sys
+sys.path("/../")
+
 from Tkinter import *
 import tkMessageBox as mBox
 import make_set

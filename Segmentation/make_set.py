@@ -1,3 +1,6 @@
+import sys
+sys.path.append("../Segmentation")
+
 import PIL
 from PIL import Image
 import os
@@ -44,7 +47,7 @@ def cut(path):
 	border.string_border(im2)
 	border.letter_border(im2)
 	
-	count = 0
+	count = 100
 	for letter in border.letters:
 		if letter[0] - letter[2] < 0:
 			im3 = im2.crop(letter)
