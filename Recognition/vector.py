@@ -71,10 +71,10 @@ class Common_Vector_Compare(Vector_Compare):
 		return im_new
 
 	def creating_vectors(self, im1, im2):
-		min_x = min(im1.size[0], im2.size[0])
-		min_y = min(im1.size[1], im2.size[1])
-		im1_new = Image.new("P", (min_x, min_y), 255)
-		im2_new = Image.new("P", (min_x, min_y), 255)
-		im1_new = self.compression(im1, min_x, min_y)
-		im2_new = self.compression(im2, min_x, min_y)
+		max_x = max(im1.size[0], im2.size[0])
+		max_y = max(im1.size[1], im2.size[1])
+		im1_new = Image.new("P", (max_x, max_y), 255)
+		im2_new = Image.new("P", (max_x, max_y), 255)
+		im1_new = self.grows(im1, max_x, max_y)
+		im2_new = self.grows(im2, max_x, max_y)
 		return (self.buildvector(im1_new), self.buildvector(im2_new))
