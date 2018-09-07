@@ -51,6 +51,25 @@ class Common_Vector_Compare(Vector_Compare):
 					im_new.putpixel((i, j), 0)
 		return im_new
 
+	#help function for image's homomorphism
+	def f(self, x, zoom, rem):
+		if (x // (zoom + 1) < rem):
+			return (x // (zoom+1))
+		else:
+			return ((x - rem) // zoom)
+
+	#new function for zoom
+	def grows(self, im, x, y):
+		im_new = Image.new("P", (x, y), 255)
+		zoom_x, zoom_y = x // im.size[0], y // im.size[1]
+		rem_x, rem_y = x % im.size[0], y % im.size[1]
+		for i in range(x):
+			for j in range(y):
+				a = im.getpixel((self.f(i, zoom_x, rem_x), self.f(j, zoom_y, rem_y)))
+				if a == 0:
+					im_new.putpixel((i, j), 0)
+		return im_new
+
 	def creating_vectors(self, im1, im2):
 		min_x = min(im1.size[0], im2.size[0])
 		min_y = min(im1.size[1], im2.size[1])
