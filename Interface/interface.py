@@ -1,5 +1,6 @@
 import sys
-sys.path("/../")
+sys.path.append("./../Segmentation")
+sys.path.append("./..")
 
 from Tkinter import *
 import tkMessageBox as mBox
@@ -103,8 +104,9 @@ class window():
 		command = lambda: self.show_it(list_of_choose))
 		show.pack()
 
-		add = Button(self.root, text = "Add new set", width = 20, bg = self.color_bg, fg = self.color_text, font = self.style_text, command = self.add_set)
-		add.pack()
+#		This button is useless in current version
+#		add = Button(self.root, text = "Add new set", width = 20, bg = self.color_bg, fg = self.color_text, font = self.style_text, command = self.add_set)
+#		add.pack()
 
 		cancel = Button(self.root, text = "Cancel", width = 20, bg = self.color_bg, fg = self.color_text, font = self.style_text,
 		command = self.start)
@@ -119,6 +121,8 @@ class window():
 
 		mBox.showinfo("Choosed Sets", show)
 
+
+	#Function "add_set" is not used in current version
 	def add_set(self):
 		clear(self.root)
 		label1 = Label(text = "Input directory with new set")
