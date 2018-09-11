@@ -28,18 +28,3 @@ def symmetry(letter):
 	#class 2 - (0, 1)
 	#class 3 - (1, 1)
 	return (vert + 2 * hor)
-
-set = ['0','1','2','3','4','5','6','7','8','9']
-set = set + ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
-set = set + ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
-set = set + ['+', '-', '=', '<', '>']
-set = set + ['?', ',', ':', ';', '!']
-
-output = open("SET/symmetry.txt", "w")
-for i in set:
-	for j in os.listdir("SET/%s"%(i)):
-		let = Image.open("SET/%s/%s"%(i, j))
-		q = symmetry(let)
-		output.write(i + " " + str(q) + "\n")
-
-output.close()

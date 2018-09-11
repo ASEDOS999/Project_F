@@ -1,89 +1,88 @@
 Numbers
 {
-0:SET/0
-1:SET/1
-2:SET/2
-3:SET/3
-4:SET/4
-5:SET/5
-6:SET/6
-7:SET/7
-8:SET/8
-9:SET/9
-0:SET/0
+0:SET/0 3
+1:SET/1 3
+2:SET/2 0
+3:SET/3 0
+4:SET/4 0
+5:SET/5 0
+6:SET/6 0
+7:SET/7 0
+8:SET/8 1
+9:SET/9 0
 }
 English(small)
 {
-a:SET/a
-b:SET/b
-c:SET/c
-d:SET/d
-e:SET/e
-f:SET/f
-g:SET/g
-h:SET/h
-i:SET/i
-j:SET/j
-k:SET/k
-l:SET/l
-m:SET/m
-n:SET/n
-o:SET/o
-p:SET/p
-q:SET/q
-r:SET/r
-s:SET/s
-t:SET/t
-u:SET/u
-v:SET/v
-w:SET/w
-x:SET/x
-y:SET/y
-z:SET/z
+a:SET/a 0
+b:SET/b 0
+c:SET/c 0
+d:SET/d 0
+e:SET/e 1
+f:SET/f 0
+g:SET/g 0
+h:SET/h 0
+i:SET/i 1
+j:SET/j 0
+k:SET/k 0
+l:SET/l 1
+m:SET/m 3
+n:SET/n 3
+o:SET/o 1
+p:SET/p 0
+q:SET/q 0
+r:SET/r 0
+s:SET/s 1
+t:SET/t 2
+u:SET/u 3
+v:SET/v 1
+w:SET/w 1
+x:SET/x 1
+y:SET/y 0
+z:SET/z 0
 }
 English(caps)
 {
-A:SET/A
-B:SET/B
-C:SET/C
-D:SET/D
-E:SET/E
-F:SET/F
-G:SET/G
-H:SET/H
-I:SET/I
-J:SET/J
-K:SET/K
-L:SET/L
-M:SET/M
-N:SET/N
-O:SET/O
-P:SET/P
-Q:SET/Q
-R:SET/R
-S:SET/S
-T:SET/T
-U:SET/U
-V:SET/V
-W:SET/W
-X:SET/X
-Y:SET/Y
-Z:SET/Z
+A:SET/A 1
+B:SET/B 2
+C:SET/C 2
+D:SET/D 2
+E:SET/E 0
+F:SET/F 2
+G:SET/G 2
+H:SET/H 3
+I:SET/I 1
+J:SET/J 2
+K:SET/K 2
+L:SET/L 2
+M:SET/M 1
+N:SET/N 0
+O:SET/O 1
+P:SET/P 0
+Q:SET/Q 1
+R:SET/R 0
+S:SET/S 0
+T:SET/T 1
+U:SET/U 1
+V:SET/V 0
+W:SET/W 0
+X:SET/X 1
+Y:SET/Y 1
+Z:SET/Z 0
 }
 Punctuation
 {
-?:SET/?
-,:SET/,
-::SET/:
-;:SET/;
-!:SET/!
+?:SET/? 1
+,:SET/, 0
+::SET/: 1
+;:SET/; 1
+!:SET/! 1
 .:SET/point
 }
 Math
 {
-+:SET/+
--:SET/-
-=:SET/=
-<:SET/<
->:SET/>
++:SET/+ 3
+-:SET/- 3
+=:SET/= 3
+<:SET/< 3
+>:SET/> 3
 }
