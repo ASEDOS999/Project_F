@@ -3,7 +3,7 @@
 import sys
 sys.path.append("./Interface")
 sys.path.append("./Segmentation")
-
+sys.path.append("./Kernel")
 import interface
 
 i = 0

@@ -1,11 +1,11 @@
 import sys
 sys.path.append("./../Segmentation")
-sys.path.append("./..")
+sys.path.append("./../Kernel")
 
 from Tkinter import *
 import tkMessageBox as mBox
 import make_set
-import main
+import kernel as main
 
 def end():
         sys.exit()
