@@ -7,7 +7,7 @@ sys.path.append("./Kernel")
 import interface
 
 i = 0
-inp = open('SET/list_of_set.txt')
+inp = open('Recognition/list_of_set.txt')
 line = inp.readline()
 current_set = []
 v = interface.window()
