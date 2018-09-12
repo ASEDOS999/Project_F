@@ -1,18 +1,21 @@
+import math
+import PIL
+from PIL import Image
+import os
+from time import time
+
 import sys
 sys.path.append("./Segmentation")
 sys.path.append("./Recognition")
 sys.path.append("./Interface")
 
-import math
-import PIL
 import vector
 import recog
-import os
 from segmentation import segmentation
-from PIL import Image
 
 
 def text(set, path):
+	start_time = time()
 	im = Image.open("../../../%s"%(path))
 	mas = im.histogram()
 	mas1 = im.histogram()
@@ -115,4 +118,5 @@ def text(set, path):
 		number_letter += 1
 	text_letter = []
 	output.close()
-
+	end_time = time()
+	print end_time - start_time
