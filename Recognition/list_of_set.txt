@@ -17,26 +17,26 @@ a:./SET/a 0
 b:./SET/b 0
 c:./SET/c 0
 d:./SET/d 0
-e:./SET/e 1
+e:./SET/e 0
 f:./SET/f 0
 g:./SET/g 0
 h:./SET/h 0
 i:./SET/i 1
 j:./SET/j 0
 k:./SET/k 0
-l:./SET/l 1
+l:./SET/l 3
 m:./SET/m 3
 n:./SET/n 3
-o:./SET/o 1
+o:./SET/o 3
 p:./SET/p 0
 q:./SET/q 0
 r:./SET/r 0
-s:./SET/s 1
-t:./SET/t 2
+s:./SET/s 0
+t:./SET/t 0
 u:./SET/u 3
-v:./SET/v 1
-w:./SET/w 1
-x:./SET/x 1
+v:./SET/v 0
+w:./SET/w 0
+x:./SET/x 3
 y:./SET/y 0
 z:./SET/z 0
 }
@@ -46,26 +46,26 @@ A:./SET/A 1
 B:./SET/B 2
 C:./SET/C 2
 D:./SET/D 2
-E:./SET/E 0
+E:./SET/E 2
 F:./SET/F 2
 G:./SET/G 2
 H:./SET/H 3
-I:./SET/I 1
+I:./SET/I 3
 J:./SET/J 2
 K:./SET/K 2
 L:./SET/L 2
-M:./SET/M 1
+M:./SET/M 0
 N:./SET/N 0
-O:./SET/O 1
+O:./SET/O 3
 P:./SET/P 0
 Q:./SET/Q 1
-R:./SET/R 0
+R:./SET/R 2
 S:./SET/S 0
-T:./SET/T 1
-U:./SET/U 1
+T:./SET/T 3
+U:./SET/U 2
 V:./SET/V 0
 W:./SET/W 0
-X:./SET/X 1
+X:./SET/X 3
 Y:./SET/Y 1
 Z:./SET/Z 0
 }
@@ -73,16 +73,16 @@ Punctuation
 {
 ?:./SET/? 1
 ,:./SET/, 0
-::./SET/: 1
+::./SET/: 3
 ;:./SET/; 1
 !:./SET/! 1
-.:./SET/point 3
+.:./SET/point 1
 }
 Math
 {
 +:./SET/+ 3
--:./SET/- 3
+-:./SET/- 1
 =:./SET/= 3
-<:./SET/< 3
->:./SET/> 3
+<:./SET/< 2
+>:./SET/> 0
 }

@@ -37,18 +37,14 @@ class segmentation():
 		start_y = 0
 		end_x = 0
 		end_y = 0
-		last_column, current_column = [], []
 
 		for string in self.strings:
 			start = string[0]
 			end = string[1]
 			for x in range(im.size[0]):
-				last_column = current_column
-				current_column = []
 
 				for y in range(start, end, 1):
 					pix = im.getpixel((x,y))
-					current_column.append(pix)
 					if pix == 0:
 						inletter = True
 
@@ -60,7 +56,21 @@ class segmentation():
 				if foundletter == True and (inletter == False):
 					foundletter = False
 					end_x = x
-					self.letters.append((start_x, start, end_x, end))
+					black = False
+					j = start
+					while black == False:
+						for i in range(start_x, end_x, 1):
+							if im.getpixel((i, j)) == 0:
+								black = True
+						j+= 1
+					f = end
+					black = False
+					while black == False:
+						for i in range(start_x, end_x, 1):
+							if im.getpixel((i, f)) == 0:
+								black = True
+						f-= 1
+					self.letters.append((start_x, j, end_x, f))
 
 				inletter=False
 		return 0
