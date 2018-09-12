@@ -76,7 +76,7 @@ Punctuation
 ::SET/: 1
 ;:SET/; 1
 !:SET/! 1
-.:SET/point
+.:SET/point 3
 }
 Math
 {

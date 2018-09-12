@@ -40,15 +40,17 @@ for i in set:
 out.write('}')
 out.write('\n')
 
-set = ['?', ',', ':', ';', '!']
+set = ['?', ',', ':', ';', '!', 'point']
 out.write('Punctuation\n{\n')
 for i in set:
-	out.write('%s:SET/%s'%(i, i))
+	if i == 'point':
+		out.write('.:SET/%s'%(i))
+	else:
+		out.write('%s:SET/%s'%(i, i))
 	for j in os.listdir("%s"%(i)):
 		let = Image.open("%s/%s"%(i, j))
 		q = symmetry(let)
 	out.write(" " + str(q) + "\n")
-out.write('.:SET/point\n')
 out.write('}')
 out.write('\n')
 
