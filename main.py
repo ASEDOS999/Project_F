@@ -17,7 +17,7 @@ while line:
 		v.set_of_set.append((name, current_set))
 		current_set = []
 	if i == 1:
-		current_set.append((line[0],line[2:len(line)-3]))
+		current_set.append((line[0],line[2:len(line)-3], int(line[len(line) - 2:len(line) - 1])))
 	if line == '{\n':
 		i = 1
 	if i == 0 and line != '}\n':

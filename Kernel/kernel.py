@@ -15,6 +15,7 @@ from segmentation import segmentation
 
 
 def text(set, path):
+	use_sym = 0
 	start_time = time()
 	im = Image.open("../../../%s"%(path))
 	mas = im.histogram()
@@ -70,9 +71,10 @@ def text(set, path):
 
 	set_label = []
 	place_label = 0
+	num = 0
 	start, end, prev = 0, 0, 0
 	for letter in letters:
-		if letter[1] == start and letter[3] == end:
+		if (letter[1] <= start) == (letter[3] >= end):
 			delta = letter[0] - prev
 			if delta >= label:
 				set_label.append((place_label, ' '))
@@ -101,7 +103,11 @@ def text(set, path):
 		v.count = z
 		guess = []
 		cutlet = im2.crop(letter)
-		guess = recog.symb_recog(v, cutlet, imageset)
+		if use_sym == 1:
+			sym_of_cutlet = symmetry(cutlet)
+		else:
+			sym_of_cutlet = -1
+		guess = recog.symb_recog(v, (cutlet, sym_of_cutlet), imageset)
 		guess.sort()
 		text_letter.append(guess[len(guess) - 1][1])
 		z = z + 100
