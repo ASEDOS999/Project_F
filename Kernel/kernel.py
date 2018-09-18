@@ -74,7 +74,10 @@ def text(set, path):
 	num = 0
 	start, end, prev = 0, 0, 0
 	for letter in letters:
-		if (letter[1] <= start) == (letter[3] >= end):
+		#(a+c)(b+d)=ab
+		is_new_string = letter[1] > end
+		print(start, end, prev, is_new_string)
+		if not is_new_string:
 			delta = letter[0] - prev
 			if delta >= label:
 				set_label.append((place_label, ' '))
