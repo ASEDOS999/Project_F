@@ -11,4 +11,4 @@ set.append(('B', '../SET/B'))
 set.append(('C', '../SET/C'))
 set.append(('D', '../SET/D'))
 
-main.text(set, 'Desktop/PROJECTS/Project_F/ABCD/T_3.gif')
+kernel.text(set, 'Desktop/PROJECTS/Project_F/ABCD/T_3.gif')
