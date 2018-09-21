@@ -12,8 +12,12 @@ sys.path.append("./Interface")
 import vector
 import recog
 from segmentation import segmentation
+from test_symmetry import symmetry
 
-
+#it's main function in this progemm. It's used for filtration and call of recognizing function
+#Arguments:
+#set - set of (symbol, path to folder with examples for him, class of symmetry)
+#path - path to recognized image
 def text(set, path):
 	use_sym = 0
 	start_time = time()
@@ -25,7 +29,6 @@ def text(set, path):
 	first_max_color, sec_max_color = mas1.index(mas[0]), mas1.index(mas[1])
 
 	#CREATING NEW IMAGE
-
 
 	im2 = Image.new("P", im.size, 255)
 	temp = {}
@@ -76,7 +79,6 @@ def text(set, path):
 	for letter in letters:
 		#(a+c)(b+d)=ab
 		is_new_string = letter[1] > end
-		print(start, end, prev, is_new_string)
 		if not is_new_string:
 			delta = letter[0] - prev
 			if delta >= label:
@@ -97,7 +99,7 @@ def text(set, path):
 	for i in set:
 		for img in os.listdir('%s'%(i[1])):
 			temp = Image.open('%s/%s'%(i[1], img))
-			imageset.append((i[0], temp))
+			imageset.append((i[0], temp, i[2]))
 
 	v = vector.Common_Vector_Compare()
 	text_letter = []
