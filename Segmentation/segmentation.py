@@ -70,7 +70,7 @@ class segmentation():
 							if im.getpixel((i, f)) == 0:
 								black = True
 						f-= 1
-					self.letters.append((start_x, j, end_x, f))
+					self.letters.append((start_x, j-1, end_x, f+1))
 
 				inletter=False
 		return 0
