@@ -1,6 +1,7 @@
 import math
 import PIL
 from PIL import Image
+from fractions import gcd
 
 #It is vector compare: vector module and Hamming's distance between two vector-images
 class Vector_Compare:
@@ -22,11 +23,22 @@ class Vector_Compare:
 		#Euclid's scalar product
 		relevance = 0
 		topvalue = 0
-		for word, count in concordance1.iteritems():
-			if concordance2.has_key(word):
-				topvalue += count * concordance2[word]
-		return topvalue / max(1, (self.magnitude(concordance1) * self.magnitude(concordance2)))
+		if len(concordance1) != len(concordance2):
+			sys.exit()
+		for i in range(len(concordance1)):
+			if concordance1[i] == concordance2[i]:
+				topvalue += 1
+		return topvalue / len(concordance1)
 
+	def new_relation(self, (im1, im2)):
+		ret = 0.0
+		if im1.size != im2.size:
+			print "Non-equal sizes of images"
+		for x in range(im1.size[0]):
+			for y in range(im1.size[1]):
+				if im1.getpixel((x, y)) == im2.getpixel((x, y)):
+					ret += 1
+		return ret /(im1.size[0]*im1.size[1])
 class Common_Vector_Compare(Vector_Compare):
 	def compression(self, im, x, y):
 		pix = 0
@@ -72,9 +84,9 @@ class Common_Vector_Compare(Vector_Compare):
 
 	def creating_vectors(self, im1, im2):
 		max_x = max(im1.size[0], im2.size[0])
-		max_y = max(im1.size[1], im2.size[1])
+		max_y = min(im1.size[1], im2.size[1])
 		im1_new = Image.new("P", (max_x, max_y), 255)
 		im2_new = Image.new("P", (max_x, max_y), 255)
 		im1_new = self.grows(im1, max_x, max_y)
 		im2_new = self.grows(im2, max_x, max_y)
-		return (self.buildvector(im1_new), self.buildvector(im2_new))
+		return ((im1_new), (im2_new))
