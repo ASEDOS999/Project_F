@@ -6,5 +6,5 @@ def symb_recog(v, letter, set):
 	guess = []
 	for x in set:
 		if letter[1] == -1 or letter[1] == x[2]:
-			guess.append((v.relation(v.creating_vectors(x[1], letter[0])), x[0]))
+			guess.append((v.new_relation(v.creating_vectors(x[1], letter[0])), x[0]))
 	return guess
